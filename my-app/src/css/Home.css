@@ -1,0 +1,50 @@
+#home{
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+     /* CHANGE FONT HERE */
+    background: white;
+}
+
+#everything-box { 
+    height: 100%;
+    display: flex;
+  }
+
+.top-bar {
+    width: 100vw;                  
+    height: 60px;                 
+    background-color: #FAFAFA;    
+    display: flex;
+    flex-direction: row;          
+}
+
+.top-bar:nth-child(1) {  /* drop shadow effect or whateva */
+    filter: drop-shadow(#CEECF5 0.11rem 1rem 10px); 
+  }
+.vertical-nav {
+    width: 200px;
+    height: 100vh;
+    background-color: #c2cad1d3; /* cahnged color here (too light before) */
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+}
+
+.vertical-nav:nth-child(1) {
+    filter: drop-shadow(#348ca6 0.11rem 1rem 10px); /* this doesnt work idk why */
+  }
+
+.menu-icon {
+    font-size: 24px;
+    color: black;
+    cursor: pointer; 
+    padding: 10px;    
+}
+
+.inside-box { /*this is where the pics would be MAKE THIS SOON SO WE HAVE PICS N STUFF*/ 
+
+}
