@@ -26,7 +26,7 @@ const Validation = ({ title, message, onRed, onBlue, button1Text, button2Text })
           </div>
           <button
             onClick={onBlue} 
-            className="absolute top-3 right-3 text-bold text-gray-500 hover:text-gray-700"
+            className="absolute top-3 right-3 text-bold text-gray-500 hover:text-gray-700 text-2xl"
           >
             x
           </button>

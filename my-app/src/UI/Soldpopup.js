@@ -55,7 +55,7 @@ function Soldpopup({ isOpen, handleClose, image }) {
           </button>
           <button 
             onClick={handleDelete}
-            className="bg-[#FF6666] hover:bg-[#e64a19] text-black rounded-3xl shadow-md transition-color w-36 h-10"
+            className="bg-[#FF6666] hover:bg-[#e64a19] text-black rounded-3xl shadow-md transition-color w-36 h-10 text-2xl"
           >
             Delete
           </button>

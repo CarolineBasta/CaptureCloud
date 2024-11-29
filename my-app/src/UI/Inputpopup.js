@@ -45,7 +45,7 @@ const InputPopup = ({ title, button, onConfirm, sub1, sub2, sub3}) => {
                 </button>
                 <button
                     onClick={onConfirm}
-                    className="absolute top-3 right-3 text-bold text-gray-500 hover:text-gray-700"
+                    className="absolute top-3 right-3 text-bold text-gray-500 hover:text-gray-700 text-2xl"
             
                 >
                     x

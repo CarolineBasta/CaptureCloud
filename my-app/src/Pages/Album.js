@@ -6,11 +6,11 @@ import folderIcon from '../Assets/Icons/Folder_add_fill.png';
 import { Link } from 'react-router-dom'; 
 import Button from '../UI/button';  
 import checkIcon from '../Assets/Icons/Check.png'; 
+import ARpopup from '../UI/ARpopup';
 
 function Album() {
   const [isSelected, setIsSelected] = useState(false); 
-  const [newAlbumName, setNewAlbumName] = useState(''); 
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [albums, setAlbums] = useState(() => {
     const savedAlbums = localStorage.getItem('albums');
     return savedAlbums ? JSON.parse(savedAlbums) : [
@@ -34,10 +34,7 @@ function Album() {
 
   const handlePlusClick = () => {
     if (!isSelected) {  
-      setAlbums([ 
-        ...albums, 
-        { name: `NewAlbum ${albums.length + 1}`, icon: folderIcon }
-      ]);
+      setIsPopupOpen(true); 
     }
   };
 
@@ -55,6 +52,16 @@ function Album() {
     setAlbums(updatedAlbums);
     setSelectedAlbums([]); 
     localStorage.setItem('albums', JSON.stringify(updatedAlbums));
+  };
+
+  const handlePopupConfirm = (newAlbumName) => {
+    const newAlbum = { name: newAlbumName, icon: folderIcon };
+    setAlbums([...albums, newAlbum]);
+    setIsPopupOpen(false);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
   };
 
   return (
@@ -83,7 +90,7 @@ function Album() {
         </div>
 
         <div className="flex flex-col items-center space-y-1 w-1/4 mt-16"> 
-        <Link to="/flowers">
+          <Link to="/flowers">
             <div className="cursor-pointer rounded-2xl">
               <img 
                 src={folderIcon} 
@@ -130,7 +137,6 @@ function Album() {
             <span className="text-center text-blue-400">{album.name}</span> 
           </div>
         ))}
-
       </div>
 
       <div className="fixed top-12 right-40 mt-14 mr-6">
@@ -153,6 +159,10 @@ function Album() {
             Delete Albums
           </Button>
         </div>
+      )}
+
+      {isPopupOpen && (
+        <ARpopup onConfirm={handlePopupConfirm} onClose={handlePopupClose} />
       )}
     </div>
   );

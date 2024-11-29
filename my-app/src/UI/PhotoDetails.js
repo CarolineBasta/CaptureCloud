@@ -36,10 +36,10 @@ function PhotoDetails({
 
         {/* Edit and Sold Buttons */}
         <div className="flex justify-between">
-          <button onClick={onEdit} className="bg-ccBlue px-4 py-2 rounded-full font-medium">
+          <button onClick={onEdit} className="bg-ccBlue px-9 py-3 rounded-[20px] font-medium text-xl">
             Edit
           </button>
-          <button onClick={onMarkSold} className="bg-ccBlue px-4 py-2 rounded-full font-medium">
+          <button onClick={onMarkSold} className="bg-ccBlue px-9 py-3 rounded-[20px] font-medium text-xl">
             Sold
           </button>
         </div>

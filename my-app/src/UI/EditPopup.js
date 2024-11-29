@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import InfoIcon from '../Assets/Icons/Info icon.png';
+import React, { useState, useRef } from 'react';
+import fullScreenIcon from '../Assets/Icons/Full_Screen_Corner.png';
+import i from '../Assets/Icons/i.png';
+import Validation from './Validation';
 
 function EditPopup({ image, onClose, onSave, onDelete }) {
   const [caption, setCaption] = useState(image.caption || '');
@@ -7,8 +9,8 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
   const [newTag, setNewTag] = useState('');
   const [isStarred, setIsStarred] = useState(image.isStarred || false);
   const [showExitWarning, setShowExitWarning] = useState(false);
+  const imageRef = useRef(null);
 
-  
   const handleAddTag = () => {
     if (newTag && !tags.includes(newTag)) {
       setTags([...tags, newTag]);
@@ -19,22 +21,28 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
   const handleRemoveTag = (tagToRemove) => {
     setTags(tags.filter(tag => tag !== tagToRemove));
   };
-  
+
   const handleSave = () => {
     const updatedDetails = {
       caption, isStarred, tags
     };
-    onSave(updatedDetails); // Pass updated details to parent
+    onSave(updatedDetails);
   };
 
   const handleExitWithoutSaving = () => {
     setShowExitWarning(false);
     onClose();
-  }
+  };
+
+  const handleFullScreen = () => {
+    if (imageRef.current && imageRef.current.requestFullscreen) {
+      imageRef.current.requestFullscreen();
+    }
+  };
 
   return (
-    <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex justify-center">
-      <div className="bg-white p-6 rounded-lg w-100 shadow-lg relative w-full max-w-lg sm:w-100 sm:p-8">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-lg w-full max-w-lg sm:p-8 relative">
         {/* Close Button */}
         <button
           onClick={() => setShowExitWarning(true)}
@@ -44,41 +52,28 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
         </button>
         {/* Exit Warning Dialog */}
         {showExitWarning && (
-          <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
-            
-              <h2 className="text-lg font-bold mb-4 flex items-center justify-center gap-3">
-              <img src={InfoIcon} className="w-10 h-10" alt="Info Icon" />
-                Exit Edit Screen?
-              </h2>
-              <p className="text-gray-700 mb-4">
-                Are you sure you want to exit?<br />
-                Edits will not be saved.
-              </p>
-              <div className="flex justify-between">
-                <button
-                  onClick={() => setShowExitWarning(false)} // Resume editing
-                  className="bg-[#BDD9E2] px-4 py-2 rounded-full font-medium"
-                >
-                  Resume Edit
-                </button>
-                <button
-                  onClick={handleExitWithoutSaving} // Exit without saving
-                  className="bg-red-500 px-4 py-2 rounded-full text-white font-medium"
-                >
-                  Exit Edit
-                </button>
-              </div>
-            </div>
-          </div>
+          <Validation
+            title="Exit Edit Screen?"
+            message="Are you sure you want to exit? Edits will not be saved."
+            onBlue={() => setShowExitWarning(false)} // Resume editing
+            onRed={handleExitWithoutSaving} // Exit without saving
+            button1Text="Resume Edit"
+            button2Text="Exit"
+          />
         )}
-        {/* Image Preview */}
-        <img
-          src={image.url}
-          alt="Edit Image"
-          className="w-full rounded-lg mb-5"
-        />
 
+        {/* Image Preview */}
+        <div className="relative">
+          <img
+            ref={imageRef}
+            src={image.url}
+            alt="Edit Image"
+            className="w-full rounded-lg mb-5"
+          />
+          <button onClick={handleFullScreen} className="absolute top-2 left-2 h-6 w-6" title="Full Screen">
+            <img src={fullScreenIcon} alt="Full Screen" />
+          </button>
+        </div>
 
         {/* Star Image */}
         <div className="mb-2 flex items-center justify-between">
@@ -89,24 +84,24 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
             &#9733; {/* Star icon */}
           </button>
 
-        {/* Album Label and Dropdown */}
-        <form className="max-w-sm flex items-center space-x-2 m-3">
-          <label htmlFor="albums" className="text-gray-700 font-medium mt-1">
-            Album
-          </label>
-          <select
-            id="albums"
-            className="border-2 text-gray-500 italic rounded-full px-4 py-2 border-text-c"
-          >
-            <option value="" disabled selected>
+          {/* Album Label and Dropdown */}
+          <form className="max-w-sm flex items-center space-x-2 m-3">
+            <label htmlFor="albums" className="text-gray-700 font-medium mt-1">
+              Album
+            </label>
+            <select
+              id="albums"
+              className="border-2 text-gray-500 italic rounded-full px-4 py-2 border-text-c"
+            >
+              <option value="" disabled selected>
                 Select an Album
-            </option>
-            <option value="2020">2020</option>
-            <option value="CA">Canada</option>
-            <option value="CAT">Cats</option>
-            <option value="OU">Outdoors</option>
-          </select>
-        </form>
+              </option>
+              <option value="2020">2020</option>
+              <option value="CA">Canada</option>
+              <option value="CAT">Cats</option>
+              <option value="OU">Outdoors</option>
+            </select>
+          </form>
         </div>
 
         {/* Tags and Caption Input */}
@@ -125,10 +120,10 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
 
         {/* Tags Input */}
         <label className="block text-gray-700 font-medium">
-            Add Tags
+          Add Tags
         </label>
         <div className="flex items-center mb-4">
-        <input
+          <input
             className="w-full border-2 text-gray-500 italic text-c rounded-full p-1 border-text-c"
             placeholder="Add tags..."
             value={newTag}
@@ -152,15 +147,13 @@ function EditPopup({ image, onClose, onSave, onDelete }) {
               {tag}
               <button
                 onClick={() => handleRemoveTag(tag)}
-                className="ml-1 text-purple-600"
+                className="ml-1 text-black"
               >
                 &times;
               </button>
             </span>
           ))}
         </div>
-
-
 
         {/* Save and Delete Buttons */}
         <div className="flex justify-between">

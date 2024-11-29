@@ -1,22 +1,58 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Layout/Navbar.js';
 import logo from '../Assets/Logo/Logo.png';
 import phone from '../Assets/Icons/Phone.png';
 import uploadCloud from '../Assets/Icons/Upload cloud black.png';
 import Popup from '../UI/Changepasswordpopup.js'; 
+import CUPopup from '../UI/ConactUsPopup.js';
+import Confirmation from '../UI/Confirmation.js';
+import Validation from '../UI/Validation';
+
 
 function Account() {
   useEffect(() => { document.title = 'My Account'; });
   const [name] = useState("Jane Doe");
   const [email] = useState("janedoe@gmail.com");
   const [showPopup, setShowPopup] = useState(false);
+  const [showCUPopup, setShowCUPopup] = useState(false)
+  const [showConfPopup, setShowConfPopup] = useState(false)
+  const [showValidationPopup, setShowValidationPopup] = useState(false);
+  const navigate = useNavigate();
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
+  const toggleCUPopup = () => {
+    setShowCUPopup(!showCUPopup); 
+  };
+
+  const toggleValidationPopup = () => {
+    setShowValidationPopup(!showValidationPopup);
+  };
+  
+
   const handleCloseValidation = () => {
     setShowPopup(false); 
+  };
+
+  const handleCUPopupConfirm = () => {
+    setShowCUPopup(false); 
+    setShowConfPopup(true); 
+  };
+
+  const handleConfPopupConfirm = () => {
+    setShowConfPopup(false); 
+  };
+
+  const handleDeleteAccountConfirm = () => {
+    setShowValidationPopup(false); 
+  };
+
+  const handleConfirmDelete = () => {
+    setShowValidationPopup(false);
+    navigate('/login'); 
   };
 
   return (
@@ -31,27 +67,27 @@ function Account() {
       <h1 className="text-5xl text-center mb-6 ml-32 text-[#6AABD2] mt-6">My Account</h1>  
 
       <div className="ml-32">
-        <div className="p-12 rounded-3xl border-2 border-black w-2/4 mx-auto flex flex-col justify-between min-h-[400px] mt-6 relative">
-          <div className="flex items-center mb-4">
-            <label htmlFor="name" className="mr-10 w-16 text-xl font-medium">
+        <div className="p-12 rounded-3xl border-2 border-black w-2/5 mx-auto flex flex-col justify-between mt-6 relative">
+          <div className="flex items-center">
+            <label htmlFor="name" className="mr-10 w-16 text-m font-medium">
               Name
             </label>
-            <div className="w-full bg-[#F5F5F5] p-3 rounded-2xl text-large text-[#3D7292] text-zinc-600 drop-shadow-2xl border border-black">
+            <div className="w-full bg-[#F5F5F5] p-3 rounded-2xl text-sm text-[#3D7292] text-zinc-600 drop-shadow-lg border border-black">
               {name}
             </div>
           </div>
 
-          <div className="flex items-center mb-4">
-            <label htmlFor="email" className="mr-10 w-16 text-xl mt-4 font-medium">
+          <div className="flex items-center">
+            <label htmlFor="email" className="mr-10 w-16 text-m mt-4 font-medium">
               Email
             </label>
-            <div className="w-full bg-[#F5F5F5] p-3 rounded-2xl text-large text-[#3D7292] text-zinc-600 drop-shadow-2xl border border-black mt-6">
+            <div className="w-full bg-[#F5F5F5] p-3 rounded-2xl text-sm text-[#3D7292] text-zinc-600 drop-shadow-lg border border-black mt-6">
               {email}
             </div>
           </div>
 
           <button type="button"
-                  className="w-[280px] h-12 bg-[#CEECF5] hover:bg-[#B6D8E7] text-l rounded-2xl shadow-lg block mx-auto mt-6"
+                  className="w-[220px] h-12 bg-[#CEECF5] hover:bg-[#B6D8E7] text-sm rounded-2xl shadow-lg block mx-auto mt-6"
                   onClick={togglePopup}>
               Change Password
           </button>
@@ -69,16 +105,48 @@ function Account() {
           }
 
           <button type="submit"
-                  className="w-[280px] h-12 bg-[#ED6B6D] hover:bg-[#D45A55] text-l rounded-2xl shadow-lg block mx-auto mt-6">
+                  className="w-[220px] h-12 bg-[#ED6B6D] hover:bg-[#D45A55] text-sm rounded-2xl shadow-lg block mx-auto mt-5 transition-colors" onClick={toggleValidationPopup}>
               Delete Account
           </button>
         </div>
       </div>
       
-      <button className="absolute bottom-10 right-14 flex items-center text-[#3D7292] hover:text-[#6AABD2] hover:underline">
+      <button className="absolute bottom-10 right-14 flex items-center text-[#3D7292] hover:text-[#6AABD2] hover:underline transition-colors" onClick={toggleCUPopup}>
         <img src={phone} alt="Phone Icon" className="w-6 h-6 mr-2" />
         Contact Us
       </button> 
+
+      {showCUPopup && 
+        <CUPopup 
+          title="Contact Us" 
+          sub1="Name" 
+          sub2="Email" 
+          sub3="Message" 
+          button="Submit"
+          onConfirm={handleCUPopupConfirm}
+          handleClose={() => setShowCUPopup(false)}
+        />
+      }
+
+      {showConfPopup && 
+        <Confirmation 
+          message="Your inquiry has been received by our team. We’ll get back to you as soon as possible." 
+          onConfirm={handleConfPopupConfirm}
+        />
+      }
+
+      {showValidationPopup && 
+        <Validation 
+          title="Delete Account?" 
+          message="Are you sure you want to permanently delete your account? This action cannot be undone." 
+          button1Text="Cancel" 
+          button2Text="Delete"
+          onBlue={handleDeleteAccountConfirm} 
+          onRed={handleConfirmDelete} 
+        />
+      }
+
+
 
       <div className="absolute bottom-16 left-[14rem] flex items-center text text-black">
         <img src={uploadCloud} alt="Upload Cloud Icon" className="w-8 h-8 mr-2" />

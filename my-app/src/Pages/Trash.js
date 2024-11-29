@@ -20,6 +20,7 @@ function Trash() {
   const [imageToDelete, setImageToDelete] = useState(null);
   const [imageToRestore, setImageToRestore] = useState(null);
   const [actionType, setActionType] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(null);
 
   useEffect(() => {
     const trash = JSON.parse(localStorage.getItem('trash')) || [];
@@ -123,14 +124,27 @@ function Trash() {
     setValidationVisible(false);
   };
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image, index) => {
     if (!isSelected) {
       setExpandedImage(image);
+      setCurrentImageIndex(index);
     }
   };
 
   const handleCloseModal = () => {
     setExpandedImage(null);
+  };
+
+  const handleNextImage = () => {
+    const nextIndex = (currentImageIndex + 1) % deletedImages.length;
+    setCurrentImageIndex(nextIndex);
+    setExpandedImage(deletedImages[nextIndex]);
+  };
+
+  const handlePreviousImage = () => {
+    const prevIndex = (currentImageIndex - 1 + deletedImages.length) % deletedImages.length;
+    setCurrentImageIndex(prevIndex);
+    setExpandedImage(deletedImages[prevIndex]);
   };
 
   return (
@@ -148,7 +162,7 @@ function Trash() {
           {deletedImages.map((image, index) => (
             <div key={index} className="relative group">
               <div
-                onClick={() => isSelected ? handleImageSelect(image) : handleImageClick(image)}
+                onClick={() => isSelected ? handleImageSelect(image) : handleImageClick(image, index)}
                 className={`cursor-pointer ${isSelected && selectedImages.includes(image) ? 'border-4 border-yellow-200 rounded-2xl' : 'rounded-2xl'}`}
                 style={{ width: '12rem', height: '10.5rem' }}
               >
@@ -202,7 +216,7 @@ function Trash() {
               color="bg-[#B1DEA5] hover:bg-[#8CBF7B]"
               className="w-36 h-12"
             >
-              Restore Selected
+              Restore
             </Button>
           </div>
 
@@ -212,7 +226,7 @@ function Trash() {
               color="bg-[#FF6666] hover:bg-[#e64a19]"
               className="w-36 h-12"
             >
-              Delete Selected
+              Delete
             </Button>
           </div>
 
@@ -243,6 +257,20 @@ function Trash() {
                 alt="Expanded"
                 className="max-w-full max-h-[80vh] object-contain"
               />
+              <button
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-[#ffffff] text-black font-bold rounded-full h-10 w-10 flex items-center justify-center shadow-md hover:shadow-lg"
+                onClick={handlePreviousImage}
+                title="Previous"
+              >
+                &#8249;
+              </button>
+              <button
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[#ffffff] text-black font-bold rounded-full h-10 w-10 flex items-center justify-center shadow-md hover:shadow-lg"
+                onClick={handleNextImage}
+                title="Next"
+              >
+                &#8250;
+              </button>
             </div>
           </div>
 

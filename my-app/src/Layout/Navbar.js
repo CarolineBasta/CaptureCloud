@@ -16,18 +16,9 @@ import albumsIcon from '../Assets/Icons/folder_filled.png';
 import albumsSelectedIcon from '../Assets/Icons/album-s.png';
 import logoutIcon from '../Assets/Icons/Log out.png';
 import line from '../Assets/Icons/Line 7.png';
-import chevronRightIcon from '../Assets/Icons/Chevron right.png';  
 
 function Navbar() {
   const location = useLocation(); 
-  const [albumsVisible, setAlbumsVisible] = useState(false); 
-  const [isChevronRotated, setIsChevronRotated] = useState(false);
-
-  const toggleAlbumsVisibility = () => {
-    setAlbumsVisible(!albumsVisible);
-    setIsChevronRotated(!isChevronRotated); 
-  };
-
   const isAlbumDetailPage = location.pathname.startsWith('/album/');
   const isAlbumsPage = location.pathname === '/albums' || isAlbumDetailPage;
 
@@ -93,18 +84,9 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/albums" className="flex items-center space-x-2  hover:font-bold">
+        <Link to="/albums" className="flex items-center space-x-2 ml-3 hover:font-bold">
             {isAlbumsPage ? (
               <div className="flex items-center"> 
-                <img
-                  src={chevronRightIcon}
-                  alt="Chevron"
-                  className="" 
-                  style={{
-                    height: '2vh',
-                    width: '2vh',
-                  }}                
-                />
                 <div className="bg-selected h-8 w-28 flex items-center justify-center rounded-3xl">
                   <img src={albumsSelectedIcon} alt="Album" style={{ height: '3vh', width: '3vh' }} />
                   <span className="ml-2 text-white">Albums</span>
@@ -112,7 +94,7 @@ function Navbar() {
               </div>
             ) : (
               <>
-                <img src={albumsIcon} alt="Albums" className="ml-8"style={{ height: '3vh', width: '3vh' }} />
+                <img src={albumsIcon} alt="Albums" className="ml-5"style={{ height: '3vh', width: '3vh' }} />
                 <span>Albums</span>
               </>
             )}
