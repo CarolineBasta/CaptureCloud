@@ -13,6 +13,8 @@ import AllTags from './Pages/AllTags';
 import AlbumDetails from './Pages/AlbumDetails';  
 import Flowers from './Pages/Flowers';
 import Animaltag from './Pages/Animaltag';
+import Tagslist from './Pages/Tagslist';
+import Skytag from './Pages/Skytag';
 
 
 
@@ -34,7 +36,8 @@ function App() {
         <Route path="/album/:name" element={<AlbumDetails />} />  
         <Route path="/Flowers" element={<Flowers />} />
         <Route path="/all-tags" element={<AllTags />} />
-          
+        <Route path="/tagslist" element={<Tagslist />} />
+        <Route path="/skytag" element={<Skytag />} />
       </Routes>
     </Router>
   );

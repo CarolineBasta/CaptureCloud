@@ -3,26 +3,26 @@ import Navbar from '../Layout/Navbar.js';
 import Searchbar from '../Layout/Searchbar.js';
 import logo from '../Assets/Logo/Logo.png';
 
-function Animaltag() {
+function Skytag() {
   const [hovered, setHovered] = useState(null);
 
   const images = [
     {
-      url: 'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350',
+      url: 'https://static.vecteezy.com/system/resources/previews/024/892/056/non_2x/vibrant-sunset-sky-over-idyllic-landscape-a-moody-backdrop-generated-by-ai-free-photo.jpg',
       caption: '',
-      tags: ['cat'],
+      tags: ['sky'],
       isStarred: false,
     },
     {
-      url: 'https://images.unsplash.com/photo-1442522772768-9032b6d10e3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      url: 'https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       caption: '',
-      tags: ['fox'],
+      tags: ['sky'],
       isStarred: false,
     },
     {
-      url: 'https://wallpapershome.com/images/pages/pic_h/1055.jpg',
+      url: 'https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       caption: '',
-      tags: ['nature', 'water'],
+      tags: ['sky'],
       isStarred: false,
     }
   ];
@@ -44,7 +44,7 @@ function Animaltag() {
           <button 
             className="absolute top-[3px] left-[480px] bg-blueButton-c text-[#016AC7] px-2 py-0.5 rounded-full flex items-center z-10"
           >
-            Animal
+            Sky
           </button>
           <Searchbar />
         </div>
@@ -78,4 +78,4 @@ function Animaltag() {
   );
 }
 
-export default Animaltag;
+export default Skytag;
