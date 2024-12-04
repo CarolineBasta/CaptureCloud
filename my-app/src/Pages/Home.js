@@ -117,7 +117,8 @@ function Home() {
           <button className="bg-blueButton-c text-[#016AC7] px-3 py-1 rounded-full mr-2 mb-2 flex items-center">Summer</button>
           <button className="bg-blueButton-c text-[#016AC7] px-3 py-1 rounded-full mr-2 mb-2 flex items-center">Beach</button>
           <button className="bg-blueButton-c text-[#016AC7] px-3 py-1 rounded-full mr-2 mb-2 flex items-center">Animal</button>
-          <button className="mb-4 text-xl text-[#016AC7] font-bold">All Tags &#10230;</button>
+          <button className="mb-4 text-xl text-[#016AC7] font-bold" onClick={() => window.location.href = '/all-tags'}> All Tags &#10230;</button>
+          
         </div>
 
         {/* Image Boxes */}
