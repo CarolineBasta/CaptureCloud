@@ -24,7 +24,7 @@ function Tagslist() {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-8 mt-2">
-        <h1 className="text-7xl text-center mb-12 text-[#6AABD2] font-[Anek Bangla]">
+        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">
           Tags
         </h1>
 

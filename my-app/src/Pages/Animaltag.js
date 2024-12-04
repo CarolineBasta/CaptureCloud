@@ -38,7 +38,7 @@ function Animaltag() {
           <img src={logo} alt="Logo" className="w-32" />
         </div>
 
-        <h1 className="text-5xl font-medium text-center mb-3 text-text-c mt-6">Home</h1>
+        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">Home</h1>
 
         <div className="relative mt-4 flex flex-col items-center">
           <button 
