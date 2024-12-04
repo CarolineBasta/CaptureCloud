@@ -44,8 +44,15 @@ function Animaltag() {
 
         <h1 className="text-5xl font-medium text-center mb-3 text-text-c mt-6">Home</h1>
 
-        {/* Searchbar */}
-        <div className="mt-4 flex flex-col items-center">
+        {/* Searchbar with Overlapping Button */}
+        <div className="relative mt-4 flex flex-col items-center">
+          {/* Overlapping Button */}
+          <button 
+            className="absolute top-[3px] left-[480px] bg-blueButton-c text-[#016AC7] px-2 py-0.5 rounded-full flex items-center z-10"
+          >
+            Animal
+          </button>
+          {/* Searchbar */}
           <Searchbar />
         </div>
 
