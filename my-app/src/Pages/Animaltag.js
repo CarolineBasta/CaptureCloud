@@ -41,12 +41,13 @@ function Animaltag() {
         <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">Home</h1>
 
         <div className="relative mt-4 flex flex-col items-center">
-          <button 
-            className="absolute top-[3px] left-[480px] bg-blueButton-c text-[#016AC7] px-2 py-0.5 rounded-full flex items-center z-10"
+          <span 
+            className="bg-[#CEECF5] text-blue-800 px-2 py-1 rounded-full flex items-center flex-shrink-0"
           >
             Animal
-          </button>
-          <Searchbar />
+          </span>
+          <Searchbar 
+          />
         </div>
 
         <div className="flex flex-row mt-8 items-start justify-center gap-5">

@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../Layout/Navbar.js';
 import logo from '../Assets/Logo/Logo.png';
 
-function Tagslist() {
+function TagsList() {
   const tags = ['Adventure', 'Beach', 'Cityscape', 'Fog', 'Forest', 'Mountain', 'Ocean', 'Portrait', 'Sky', 'Travel', 'Wildlife', 'Landscape', 'Architecture', 'Flowers', 'Autumn', 'Night', 'Stars', 'Lakeside', 'Roadtrip', 'Abstract'];
 
   const handleTagClick = (tag) => {
@@ -45,4 +45,4 @@ function Tagslist() {
   );
 }
 
-export default Tagslist;
+export default TagsList;

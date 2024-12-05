@@ -42,7 +42,7 @@ function Skytag() {
 
         <div className="relative mt-4 flex flex-col items-center">
           <button 
-            className="absolute top-[3px] left-[480px] bg-blueButton-c text-[#016AC7] px-2 py-0.5 rounded-full flex items-center z-10"
+            className="className= bg-[#CEECF5] text-blue-800 px-2 py-1 rounded-full flex items-center flex-shrink-0"
           >
             Sky
           </button>
