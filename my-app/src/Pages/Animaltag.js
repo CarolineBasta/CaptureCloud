@@ -34,27 +34,34 @@ function Animaltag() {
       </div>
 
       <div className="flex-1">
+        {/* Logo */}
         <div className="flex justify-center mt-2">
-          <img src={logo} alt="Logo" className="w-32" />
+          <img src={logo} alt="Logo" className="w-32 ml-32" />
         </div>
 
-        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">Home</h1>
+        {/* Title */}
+        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6 ml-32">Home</h1>
 
-        <div className="relative mt-4 flex items-center justify-center">
-          <button 
-            className="absolute bg-[#CEECF5] text-blue-800 px-3 py-0.5 rounded-full z-10 flex items-center justify-between">
+        {/* Searchbar and Button */}
+        <div className="relative mt-4 flex items-center justify-center ml-32">
+          <button
+            className="absolute bg-[#CEECF5] text-blue-800 px-3 py-0.5 rounded-full z-10 flex items-center justify-between"
+            style={{ left: '37%' }} 
+          >
             <span>Animals</span>
-            <button 
-              onClick={() => console.log('X button clicked')} 
+            <button
+              onClick={() => console.log('X button clicked')}
               className="text-blue-800 ml-2 text-sm rounded-full hover:text-red-500 focus:outline-none"
-              aria-label="Close">
+              aria-label="Close"
+            >
               x
             </button>
           </button>
-          <Searchbar className="z-0" />
+          <Searchbar className="z-0 ml-32 w-80" /> {/* Searchbar with `ml-32` */}
         </div>
 
-        <div className="flex flex-row mt-8 items-start justify-center gap-5">
+        {/* Images */}
+        <div className="flex flex-row mt-8 items-start justify-center gap-10 ml-32">
           {images.map((image, index) => (
             <div
               key={index}

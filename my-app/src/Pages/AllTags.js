@@ -20,15 +20,15 @@ function AllTags() {
       </div>
 
       <div className="flex justify-center mt-2">
-        <img src={logo} alt="Logo" className="w-32" />
+        <img src={logo} alt="Logo" className="mt-2 w-32 ml-32" />
       </div>
 
       <div className="flex flex-col items-center justify-center w-full p-8 mt-2">
-        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">
+        <h1 className="text-5xl text-center mb-6 text-[#6AABD2] ml-32">
           Tags
         </h1>
 
-        <div className="grid grid-cols-4 gap-10 text-lg font-medium text-black text-center font-[Anek Bangla]">
+        <div className="grid grid-cols-4 gap-10 text-lg font-medium text-black text-center font-[Anek Bangla] ml-32">
           {tags.sort().map((tag, index) => (
             <div key={index}>
               <span
