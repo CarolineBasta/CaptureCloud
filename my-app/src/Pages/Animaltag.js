@@ -40,14 +40,18 @@ function Animaltag() {
 
         <h1 className="text-5xl text-center mb-6 text-[#6AABD2] mt-6">Home</h1>
 
-        <div className="relative mt-4 flex flex-col items-center">
-          <span 
-            className="bg-[#CEECF5] text-blue-800 px-2 py-1 rounded-full flex items-center flex-shrink-0"
-          >
-            Animal
-          </span>
-          <Searchbar 
-          />
+        <div className="relative mt-4 flex items-center justify-center">
+          <button 
+            className="absolute bg-[#CEECF5] text-blue-800 px-3 py-0.5 rounded-full z-10 flex items-center justify-between">
+            <span>Animals</span>
+            <button 
+              onClick={() => console.log('X button clicked')} 
+              className="text-blue-800 ml-2 text-sm rounded-full hover:text-red-500 focus:outline-none"
+              aria-label="Close">
+              x
+            </button>
+          </button>
+          <Searchbar className="z-0" />
         </div>
 
         <div className="flex flex-row mt-8 items-start justify-center gap-5">

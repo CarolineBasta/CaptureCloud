@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import searchIcon from '../Assets/Icons/search_icon.png';
 import xIcon from '../Assets/Icons/X.png';
 
-function SearchbarHome({ onSearchUpdate }) {
+function SearchbarSold({ onSearchUpdate }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredTags, setFilteredTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const uniqueTags = ['pink', 'rose', 'sunflower', 'blue', 'purple', 'street', 'pyramid','mountain','lake','car','day',
-    'street', 'night', 'animals','trees', 'building']; // Example list of unique tags
+  const uniqueTags = ['paris', 'nature', 'animals', 'water']; // Example list of unique tags
 
   const handleSearchChange = (e) => {
     const input = e.target.value.toLowerCase();
@@ -100,4 +99,4 @@ function SearchbarHome({ onSearchUpdate }) {
   );
 }
 
-export default SearchbarHome;
+export default SearchbarSold;

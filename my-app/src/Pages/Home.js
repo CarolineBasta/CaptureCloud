@@ -10,14 +10,83 @@ import pic3 from '../Assets/Photos/pic3.jpeg';
 import pic4 from '../Assets/Photos/pic4.jpg';
 import pic5 from '../Assets/Photos/pic5.jpg';
 import pic6 from '../Assets/Photos/pic6.avif';
+import pic7 from '../Assets/Photos/mapPic2.avif';
+import pic8 from '../Assets/Photos/mapPic6.webp';
+import pic9 from '../Assets/Photos/mapPic14.jpg';
+import pic10 from '../Assets/Photos/mapPic30.jpg';
+import pic11 from '../Assets/Photos/mapPic12.jpg';
+import pic12 from '../Assets/Photos/mapPic16.jpg';
+import pic13 from '../Assets/Photos/mapPic15.jpg';
+import pic14 from '../Assets/Photos/mapPic25.webp';
+import pic15 from '../Assets/Photos/mapPic21.webp';
+import pic16 from '../Assets/Photos/mapPic26.jpg';
+import pic17 from '../Assets/Photos/mapPic13.webp';
+import pic18 from '../Assets/Photos/mapPic22.jpeg';
+import pic19 from '../Assets/Photos/mapPic7.webp';
+import pic20 from '../Assets/Photos/mapPic23.jpg';
+import pic21 from '../Assets/Photos/mapPic19.jpg';
 import Button from '../UI/button';
 import { useNavigate } from 'react-router-dom';
 import UploadCloudIcon from '../Assets/Icons/Upload cloud.png'; 
 import checkIcon from '../Assets/Icons/white_check.png'; 
 import Validation from '../UI/Validation';
 import Confirmation from '../UI/Confirmation';
+import RestoreValidation from '../UI/RestoreValidation.js';
+
 
 function Home() {
+  const [combinedImages, setCombinedImages] = useState([]);
+
+  // List of hardcoded images
+  const [images] = useState([
+    { id: 1, url: pic1, caption: '', tags: ['pink', 'rose'], isStarred: false, album: 'Flowers', location: '' },
+    { id: 2, url: pic2, caption: '', tags: ['sunflower'], isStarred: false, album: 'Flowers', location: '' },
+    { id: 3, url: pic3, caption: '', tags: ['rose'], isStarred: false, album: 'Flowers', location: ''  },
+    { id: 4, url: pic4, caption: '', tags: ['sunflower'], isStarred: false, album: 'Flowers', location: ''  },
+    { id: 5, url: pic5, caption: '', tags: ['blue'], isStarred: false, album: 'Flowers', location: ''  },
+    { id: 6, url: pic6, caption: '', tags: ['purple'], isStarred: false, album: 'Flowers', location: ''  },
+    { id: 7, url: pic7, caption: '', tags: ['street'], isStarred: false, album: '', location: ''  },
+    { id: 8, url: pic8, caption: '', tags: ['pyramid'], isStarred: false, album: '', location: ''  },
+    { id: 9, url: pic9, caption: '', tags: ['mountain'], isStarred: false, album: '', location: ''  },
+    { id: 10, url: pic10, caption: '', tags: [''], isStarred: false, album: '', location: ''  },
+    { id: 11, url: pic11, caption: '', tags: ['blue'], isStarred: false, album: '' , location: '' },
+    { id: 12, url: pic12, caption: '', tags: ['lake'], isStarred: false, album: '', location: ''  },
+    { id: 13, url: pic13, caption: '', tags: ['car', 'animals'], isStarred: false, album: '', location: ''  },
+    { id: 14, url: pic14, caption: '', tags: ['day'], isStarred: false, album: '', location: ''  },
+    { id: 15, url: pic15, caption: '', tags: ['street'], isStarred: false, album: '', location: ''  },
+    { id: 16, url: pic16, caption: '', tags: ['night'], isStarred: false, album: '', location: ''  },
+    { id: 17, url: pic17, caption: '', tags: ['night'], isStarred: false, album: '', location: ''  },
+    { id: 18, url: pic18, caption: '', tags: ['trees'], isStarred: false, album: '', location: ''  },
+    { id: 19, url: pic19, caption: '', tags: ['building'], isStarred: false, album: '', location: ''  },
+    { id: 20, url: pic20, caption: '', tags: ['street'], isStarred: false, album: '', location: ''  },
+    { id: 21, url: pic21, caption: '', tags: ['street'], isStarred: false, album: '', location: ''  },
+    // Add more dummy images as needed
+  ]);
+
+  useEffect(() => {
+    const home = JSON.parse(localStorage.getItem('home')) || [];  // Get images from local storage
+    document.title = 'Home';
+
+    // Combine hardcoded images and uploaded photos into one list
+    const allImages = [
+        ...images, // Hardcoded images
+        ...home.map((photo, index) => ({
+          id: images.length + index + 1, // Ensure unique IDs
+          url: photo,
+          caption: '',
+          tags: [],
+          isStarred: false,
+        })), // Sold and Uploaded photos
+    ];
+    setCombinedImages(allImages);   // Set the list of combined images to the combinedImages variable
+
+    // Display the "Photos uploaded sucessfully" popup if photos have just been uploaded
+    const isUploaded = JSON.parse(localStorage.getItem('isUploaded'));  // Get information from Upload page regarding if photos have been uploaded
+    if (isUploaded) {   
+      setUploadConfirmationVisible(true);   // Display "Photos uploaded sucessfully" popup
+    }
+  }, [images]);
+
   const [hovered, setHovered] = useState(null); // Hover state for image box
   const [showModal, setShowModal] = useState(false); // Initial popup modal state
   const [showEditPopup, setShowEditPopup] = useState(false); // Edit popup state
@@ -30,62 +99,20 @@ function Home() {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false); 
   const [isSoldValidationVisible, setSoldValidationVisible] = useState(false);
   const [isSoldConfirmationVisible, setSoldConfirmationVisible] = useState(false); 
-  const [newHomeImages, setNewHomeImages] = useState([]);
-  const [newSoldToHomeImages, setNewSoldToHomeImages] = useState([]);
-
+  const [isUploadConfirmationVisible, setUploadConfirmationVisible] = useState(false); 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const home = JSON.parse(localStorage.getItem('home')) || [];
-    const soldToHome = JSON.parse(localStorage.getItem('soldToHome')) || [];
-
-    document.title = 'Home';
-
-    setNewHomeImages(home);
-    setNewSoldToHomeImages(soldToHome)
-  }, []);
-
-  // List of hardcoded images
-  const [images, setImages] = useState([
-    { id: 4, url: pic1, caption: '', tags: ['pink', 'rose'], isStarred: false, album: 'Flowers' },
-    { id: 5, url: pic2, caption: '', tags: ['sunflower'], isStarred: false, album: 'Flowers' },
-    { id: 6, url: pic3, caption: '', tags: ['rose'], isStarred: false, album: 'Flowers' },
-    { id: 7, url: pic4, caption: '', tags: ['sunflower'], isStarred: false, album: 'Flowers' },
-    { id: 8, url: pic5, caption: '', tags: ['blue'], isStarred: false, album: 'Flowers' },
-    { id: 9, url: pic6, caption: '', tags: ['purple'], isStarred: false, album: 'Flowers' },
-    // Add more dummy images as needed
-  ]);
 
   const handleSearchUpdate = (searchTags) => {
     if (searchTags.length === 0) {
-      setImages(images);
+      setCombinedImages(images);
     } else {
-      const filtered = images.filter((image) =>
+      const filtered = combinedImages.filter((image) =>
         searchTags.every(tag => image.tags.includes(tag))
       );
-      setImages(filtered);
+      setCombinedImages(filtered);
     }
-  };
-
-  // Using the context to get photos from the Upload page
-  // Combine hardcoded images and uploaded photos into one list
-  const combinedImages = [
-    ...images, // Hardcoded images
-    ...newHomeImages.map((photo, index) => ({
-      id: images.length + index + 1, // Ensure unique IDs
-      url: photo,
-      caption: '',
-      tags: [],
-      isStarred: false,
-    })), // Uploaded photos
-    ...newSoldToHomeImages.map((photo, index) => ({
-      id: images.length + newHomeImages.length + index + 1, // Ensure unique IDs
-      url: photo.url,
-      caption: '',
-      tags: [],
-      isStarred: false,
-    })), // Sold photos
-  ];
+  };  
 
   // Open the first popup (Photo Details)
   const handleOpenPhotoDetails = (index) => {
@@ -101,7 +128,7 @@ function Home() {
 
   // Save edits from the EditPopup
   const handleSaveEdits = (updatedDetails) => {
-    setImages((prevImages) =>
+    setCombinedImages((prevImages) =>
       prevImages.map((image, index) =>
         index === selectedImageIndex
           ? { ...image, ...updatedDetails } // Update selected image
@@ -127,7 +154,7 @@ function Home() {
     trash.push(imageToDelete.url);
     localStorage.setItem('trash', JSON.stringify(trash));
 
-    setImages(updatedImages);
+    setCombinedImages(updatedImages);
     if (updatedImages.length > 0) {
       const nextIndex = selectedImageIndex % updatedImages.length;
       setSelectedImageIndex(nextIndex);
@@ -186,7 +213,7 @@ function Home() {
     });
     localStorage.setItem('trash', JSON.stringify(trash));
 
-    setImages(updatedImages);
+    setCombinedImages(updatedImages);
     setSelectedImages([]);
     setValidationVisible(false);
     setConfirmationVisible(true); 
@@ -205,10 +232,10 @@ function Home() {
     const imageToRestore = combinedImages[selectedImageIndex];
     const updatedImages = combinedImages.filter((image) => image.id !== imageToRestore.id);
     const homeImages = JSON.parse(localStorage.getItem('sold')) || [];
-    homeImages.push(imageToRestore);
+    homeImages.push(imageToRestore.url);
     localStorage.setItem('sold', JSON.stringify(homeImages));
 
-    setImages(updatedImages);
+    setCombinedImages(updatedImages);
     if (updatedImages.length > 0) {
       const nextIndex = selectedImageIndex % updatedImages.length;
       setSelectedImageIndex(nextIndex);
@@ -222,6 +249,11 @@ function Home() {
     setIsSelected(false); 
     setShowSoldMessage(false); // Close Sold confirmation
     setShowModal(false);
+  };
+
+  const exitConfirmUploadPopup = () => {
+    setUploadConfirmationVisible(false); 
+    localStorage.setItem("isUploaded", JSON.stringify(false));
   };
 
   return (
@@ -270,7 +302,7 @@ function Home() {
         <div className="mt-4 flex flex-col items-center ml-32">
           <SearchbarHome onSearchUpdate={handleSearchUpdate}  />
           <div className="">
-          {images.map((image) => (
+          {combinedImages.map((image) => (
           <div key={image.id} className="relative">
           </div>
         ))}
@@ -296,17 +328,19 @@ function Home() {
               <button className="bg-blueButton-c text-[#016AC7] px-3 py-1 rounded-full mr-2 mb-2 flex items-center">
                 Beach
               </button>
-              <button className="mb-4 text-xl text-[#016AC7] font-bold" onClick={() => window.location.href = '/all-tags'}> All Tags &#10230;</button>
-              {/* <button
+              <button className="bg-blueButton-c text-[#016AC7] px-3 py-1 rounded-full mr-2 mb-2 flex items-center">
+                Animal
+              </button>
+              <button
                 className={`mb-5 text-xl font-bold ${
                   combinedImages.length > 0
                     ? 'text-[#016AC7]'
                     : 'text-gray-500 cursor-not-allowed'
                 }`}
-                onClick={combinedImages.length > 0 ? () => navigate('/tagslist') : null}
+                onClick={combinedImages.length > 0 ? () => navigate('/all-tags') : null}
               >
                 All Tags &#10230;
-              </button> */}
+              </button>
             </>
           ) : (
             <h2 className="m-1 text-xl text-center text-gray-500 font-bold">
@@ -396,10 +430,12 @@ function Home() {
             image={combinedImages[selectedImageIndex].url}
             isStarred={combinedImages[selectedImageIndex].isStarred}
             caption={combinedImages[selectedImageIndex].caption}
+            album = {combinedImages[selectedImageIndex].album}
+            location = {combinedImages[selectedImageIndex].location}
             onClose={() => setShowModal(false)}
             onEdit={handleOpenEditPopup}
             onMarkSold={handleSold}
-            onPrevious={handlePreviousImage}
+            onPrev={handlePreviousImage}
             onNext={handleNextImage}
           />
         )}
@@ -427,13 +463,13 @@ function Home() {
         )}
 
         {isSoldValidationVisible && (
-          <Validation
-            title="Mark as Sold?"
-            message="Are you sure you want to mark this photo as sold?"
-            button1Text="Cancel"
-            button2Text="Sold"
+          <RestoreValidation
+            title="Restore Selected Photos?"
+            message="Are you sure you want to restore the selected photo(s) to Home Page?"
+            button1Text="Sold"
+            button2Text="Cancel"
             onBlue={cancelSold}
-            onRed={confirmSold}
+            onGreen={confirmSold}
             className="z-60"
           />
         )}
@@ -450,6 +486,14 @@ function Home() {
           <Confirmation
             message="Successfully moved to the Sold page."
             onConfirm={() => setSoldConfirmationVisible(false)}
+            className="z-60"
+          />
+        )}
+
+        {isUploadConfirmationVisible && (
+          <Confirmation
+            message="Photo(s) Successfully Uploaded."
+            onConfirm={exitConfirmUploadPopup}
             className="z-60"
           />
         )}
