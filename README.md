@@ -62,7 +62,7 @@ To explore the full features of CaptureCloud without creating a new account, you
 
 Users can search for photos in Home Page by typing keywords such as "roses and pink" for pink roses. Additionally, users can click on specific tags like "animal" on the list or All Tag page to filter photos accordingly.
 
-Users can search in Sold Pageby typing "Paris" for photos of Paris. Additionally, users can click on specific tags like "sky" on the list or All Tag page to filter photos accordingly.
+Users can search for photos in Sold Page by typing "Paris" for photos of Paris. Additionally, users can click on specific tags like "sky" on the list or All Tag page to filter photos accordingly.
 
 
 ## Acknowledgements
