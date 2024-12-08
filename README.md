@@ -2,6 +2,10 @@
 
 CaptureCloud is a web application developed as part of the CPSC 481 class project. It's designed to streamline the process for photographers to upload, organize, and manage the sales of their photos efficiently.
 
+## Website
+
+[CaptureCloud](https://capturecloud-02.netlify.app/)
+
 ## Meet the Team
 
 - **Caroline Basta**
@@ -55,6 +59,10 @@ To explore the full features of CaptureCloud without creating a new account, you
 - **Username**: janedoe@gmail.com
 - **Password**: Fox245.
 - **2-Factor Auth Pin**: 5748332
+
+Users can search for photos in Home Page by typing keywords such as "roses and pink" for pink roses. Additionally, users can click on specific tags like "animal" on the list or All Tag page to filter photos accordingly.
+
+Users can search in Sold Pageby typing "Paris" for photos of Paris. Additionally, users can click on specific tags like "sky" on the list or All Tag page to filter photos accordingly.
 
 
 ## Acknowledgements
