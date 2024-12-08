@@ -70,6 +70,40 @@ Users can search for photos in Home Page by typing keywords such as "roses and p
 
 Users can search for photos in Sold Page by typing "Paris" for photos of Paris. Additionally, users can click on specific tags like "sky" on the list or All Tag page to filter photos accordingly.
 
+## Deployment Instructions for Netlify
+
+1. **Sign in to Netlify**  
+   Log in using your GitHub account and authorize access to GitHub if prompted.
+
+2. **Fork the Repository**  
+   Navigate to the **CaptureCloud** repository on GitHub and click the **Fork** button at the top-right corner to create a copy in your account.
+
+3. **Create a New Site on Netlify**  
+   - Return to Netlify and select **Add a New Site** from the dropdown menu.  
+   - Choose **Import an Existing Project** from the options provided.
+
+4. **Connect to GitHub**  
+   - Select GitHub as the provider and authorize access if required.  
+   - On the next screen, locate and select your forked **CaptureCloud** repository.
+
+5. **Configure and Deploy**  
+   - On the **Configure and Deploy** page, your GitHub username will automatically appear as the team name.  
+   - Enter a custom site name of your choice.  
+   - In the **Build Settings** section, input the required fields exactly as shown in the image below:  
+     ![build](image.png)
+
+6. **Set Environment Variables**  
+   - Under the environment variables section, create a key named `CI` and set its value to `false`.  
+   - Repeat this for additional variables as shown in the image below:  
+     ![env varaible](image-1.png)
+
+7. **Deploy the Site**  
+   Click **Deploy Website** to initiate the deployment process.
+
+---
+
+Once the deployment is complete, your CaptureCloud site will be live and ready for use!
+
 
 ## Acknowledgements
 
