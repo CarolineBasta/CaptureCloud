@@ -6,6 +6,12 @@ CaptureCloud is a web application developed as part of the CPSC 481 class projec
 
 [CaptureCloud](https://capturecloud-02.netlify.app/)
 
+For the best viewing experience:
+- **Resolution**: Ensure your screen resolution is set to 3024 x 1964.
+- **Browser**: Access the website using Google Chrome.
+- **Zoom Level**: Set your browser zoom to 90%.
+
+
 ## Meet the Team
 
 - **Caroline Basta**
